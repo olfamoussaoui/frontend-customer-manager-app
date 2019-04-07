@@ -1,17 +1,22 @@
+import { HttpClientModule } from '@angular/common/http';
+import { ProcessHTTPMsgServiceService } from './services/process-httpmsg-service.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule,
+  MatListModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { CustomerComponent } from './customer/customer.component';
+import { CustomerService } from './services/customer.service';
 import 'hammerjs';
-import { DataTableComponent } from './data-table/data-table.component';
+import { baseURL } from './shared/baseurl';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    DataTableComponent
+    CustomerComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +29,14 @@ import { DataTableComponent } from './data-table/data-table.component';
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    CustomerService,
+    ProcessHTTPMsgServiceService,
+    {provide: 'BaseURL', useValue: baseURL}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
