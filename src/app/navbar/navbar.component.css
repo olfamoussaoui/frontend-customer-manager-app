@@ -23,12 +23,7 @@
 }
 .mat-toolbar a{
   display: inline-block;
-  margin: 0 10px;
   color: white;
   text-decoration: none;
 }
-/*@media(min-width: 768px) {
-  .sidenav {
-    display: none;
-  }
-}*/
+

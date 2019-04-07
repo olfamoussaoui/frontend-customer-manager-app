@@ -4,14 +4,14 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-import {MatIconModule} from '@angular/material/icon';
-
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import 'hammerjs';
+import { DataTableComponent } from './data-table/data-table.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    DataTableComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +22,9 @@ import 'hammerjs';
     MatIconModule,
     MatListModule,
     BrowserAnimationsModule,
-    MatIconModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
