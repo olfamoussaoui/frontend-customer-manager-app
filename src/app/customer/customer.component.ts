@@ -14,7 +14,7 @@ export class CustomerComponent implements OnInit {
   public dataSource = new MatTableDataSource<Customer>();
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  displayedColumns: string[] = ['firstname', 'lastname', 'address', 'city', 'state', 'ordertotal'];
+  displayedColumns: string[] = ['firstname', 'lastname', 'address', 'city', 'state', 'ordertotal', 'update', 'delete'];
   constructor(private customerService: CustomerService, @Inject('BaseURL') public baseURL) { }
 
   ngOnInit() {
@@ -24,5 +24,8 @@ export class CustomerComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     },
       errmess => this.errMess = errmess);
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

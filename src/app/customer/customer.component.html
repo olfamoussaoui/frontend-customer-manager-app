@@ -1,5 +1,14 @@
 <div class="mat-elevation-z8">
-  <table mat-table class="full-width-table data-table" [dataSource]="dataSource" matSort aria-label="Elements">
+  <div class="filter-section">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+    <a mat-raised-button color="primary" routerLink="/create">
+      <mat-icon>person_add</mat-icon>
+      Add New Customer
+    </a>
+  </div>
+  <table mat-table class="data-table" [dataSource]="dataSource" matSort aria-label="Elements">
     <!-- first name Column -->
     <ng-container matColumnDef="firstname">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
@@ -36,14 +45,34 @@
       <td mat-cell *matCellDef="let customers">{{customers.ordertotal}}</td>
     </ng-container>
 
+    <!-- Update Column -->
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef>Update</th>
+      <td mat-cell *matCellDef="let customers">
+        <button mat-icon-button color="accent">
+          <mat-icon class="mat-18">system_update</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+      <!-- Delete Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Delete</th>
+      <td mat-cell *matCellDef="let customers">
+          <button mat-icon-button color="warn">
+            <mat-icon class="mat-18">delete</mat-icon>
+          </button>
+      </td>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-    <mat-paginator #paginator
-      [length]="length"
-      [pageIndex]="0"
-      [pageSize]="10"
-      [pageSizeOptions]="[10, 25, 50, 100]">
+  <mat-paginator #paginator
+    class="paginator-section"
+    [length]="length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 50, 100]">
   </mat-paginator>
-  {{customer}}
 </div>

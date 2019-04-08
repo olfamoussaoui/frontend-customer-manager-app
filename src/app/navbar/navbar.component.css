@@ -21,9 +21,18 @@
 .spacer {
   flex: 1 1 auto;
 }
-.mat-toolbar a{
+.mat-toolbar a {
   display: inline-block;
   color: white;
   text-decoration: none;
 }
-
+.mat-nav-list a {
+  width: 100%;
+  text-align: left;
+}
+.active {
+  background-color: #700d9b;
+}
+.title {
+  margin-right: 10px;
+}

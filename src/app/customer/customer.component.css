@@ -1,7 +1,21 @@
-.full-width-table {
-  width: 100%;
-}
 .data-table {
+  width: 80%;
+  margin: 20px auto;
+}
+.mat-form-field {
+  font-size: 16px;
+}
+.filter-section {
+  width: 80%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-section a{
+  height: 40px;
+}
+.paginator-section {
   width: 80%;
   margin: 20px auto;
 }

@@ -6,10 +6,9 @@
       [opened]="!(isHandset$ | async)">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
+      <a mat-button routerLinkActive="active" routerLink="/home"><mat-icon>home</mat-icon>Home</a>
+      <a mat-button routerLink="/login"><mat-icon>account_circle</mat-icon> Login</a>
+      </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -22,9 +21,10 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <mat-icon>group</mat-icon>
-      <span> Customer Manager</span>
+      <span class="title"> Customer Manager</span>
+      <a *ngIf="!(isHandset$ | async)"  mat-button routerLinkActive="active" routerLink="/home"><mat-icon>home</mat-icon>Home</a>
       <span class="spacer"></span>
-      <a mat-button routerLinkActive="active"><i class="material-icons">account_circle</i> Login</a>
+      <a *ngIf="!(isHandset$ | async)"  mat-button  routerLink="/login"><mat-icon>account_circle</mat-icon>Login</a>
     </mat-toolbar>
     <!-- Add Content Here -->
     <ng-content></ng-content>
