@@ -1,0 +1,90 @@
+<mat-toolbar>
+    <span>Edit customer</span>
+    <span class="fill-remaining-space"></span>
+    <button
+      class="btn-dialog-close"
+      mat-stroked-button
+      (click)="onClose()"
+      tabIndex="-1"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+  <form
+    novalidate
+    [formGroup]="customerForm"
+    #cform="ngForm"
+    (ngSubmit)="onSubmit()"
+    class="normal-form"
+  >
+    <mat-grid-list cols="2" rowHeight="320px">
+      <mat-grid-tile>
+        <div class="controles-container">
+          <mat-form-field>
+            <input
+              formControlName="firstname"
+              matInput
+              placeholder="Firstname"
+              required
+            />
+            <mat-error *ngIf="formErrors.firstname">{{
+              formErrors.firstname
+            }}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              formControlName="lastname"
+              matInput
+              placeholder="Lastname"
+              required
+            />
+            <mat-error *ngIf="formErrors.lastname">{{
+              formErrors.lastname
+            }}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              formControlName="email"
+              matInput
+              placeholder="Email"
+              required
+            />
+            <mat-error *ngIf="formErrors.email">{{ formErrors.email }}</mat-error>
+          </mat-form-field>
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+          <mat-form-field>
+            <input formControlName="city" matInput placeholder="City" />
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="address" matInput placeholder="Address" />
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="state" matInput placeholder="State" />
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="ordertotal" matInput placeholder="Order Total" />
+          </mat-form-field>
+          <div class="button-row">
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="customerForm.invalid"
+            >
+              Submit
+            </button>
+            <button mat-raised-button color="warn" type ="button" (click)="onClear()">
+              Clear
+            </button>
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>

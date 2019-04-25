@@ -1,15 +1,15 @@
 import { CustomerService } from './../services/customer.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Customer } from '../shared/customer';
+import { Customer } from './../shared/customer';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef, MatSnackBar } from '@angular/material';
-
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatSnackBar, MatDialogRef } from '@angular/material';
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-update-customer',
+  templateUrl: './update-customer.component.html',
+  styleUrls: ['./update-customer.component.css']
 })
-export class CreateComponent implements OnInit {
+export class UpdateCustomerComponent implements OnInit {
+
   customerForm: FormGroup;
   @ViewChild('cform') customerFormDirective;
   customer: Customer;
@@ -20,38 +20,43 @@ export class CreateComponent implements OnInit {
   };
 
   validationMessages = {
-      'firstname': {
-      'required':      'First Name is required.'
+    'firstname': {
+      'required': 'First Name is required.'
     },
     'lastname': {
-      'required':      'Last Name is required.'
+      'required': 'Last Name is required.'
     },
     'email': {
-      'required':      'Email is required.',
-      'email':         'Email not in valid format.'
+      'required': 'Email is required.',
+      'email': 'Email not in valid format.'
     },
   };
-  constructor(private fb: FormBuilder, private customerService: CustomerService,
-    public dialogRef: MatDialogRef <CreateComponent>, private snackBar: MatSnackBar) {
-    this.createForm();
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder, private customerService: CustomerService,
+    public dialogRef: MatDialogRef<UpdateCustomerComponent>, private snackBar: MatSnackBar) {
+    this.createUpdateForm();
   }
-  createForm() {
+
+  ngOnInit() {
+    console.log(this.data.data);
+  }
+  createUpdateForm() {
     this.customerForm = this.fb.group({
-      firstname: new FormControl('', Validators.required),
-      lastname: new FormControl('', Validators.required),
-      gender: new FormControl('male'),
-      email: new FormControl('', [Validators.email, Validators.required]),
-      address: new FormControl(''),
-      city: new FormControl(''),
-      state: new FormControl(''),
-      ordertotal: new FormControl('')
+      _id: new FormControl(this.data.data._id),
+      firstname: new FormControl(this.data.data.firstname, Validators.required),
+      lastname: new FormControl(this.data.data.lastname, Validators.required),
+      gender: new FormControl(this.data.data.gender),
+      email: new FormControl(this.data.data.email, [Validators.email, Validators.required]),
+      address: new FormControl(this.data.data.address),
+      city: new FormControl(this.data.data.city),
+      state: new FormControl(this.data.data.state),
+      ordertotal: new FormControl(this.data.data.ordertotal)
     });
     this.customerForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged(); // (re)set validation messages now
   }
-
   onValueChanged(data?: any) {
     if (!this.customerForm) { return; }
     const form = this.customerForm;
@@ -74,10 +79,11 @@ export class CreateComponent implements OnInit {
 
   onSubmit() {
     this.customer = this.customerForm.value;
-    this.customerService.postCustomer(this.customer)
-      .subscribe(data => {
-        this.customer = data; });
     console.log(this.customer);
+    this.customerService.updateCustomer(this.customer)
+      .subscribe(data => {
+        this.customer = data;
+      });
     this.customerFormDirective.resetForm();
     this.customerForm.reset({
       firstname: '',
@@ -89,11 +95,9 @@ export class CreateComponent implements OnInit {
       city: '',
       ordertotal: ''
     });
-    this.snackBar.open('New customer has been added successfully', '', {
+    this.snackBar.open('This customer has been edited successfully', '', {
       duration: 2000,
-   });
-  }
-  ngOnInit() {
+    });
   }
   onClear() {
     this.customerFormDirective.resetForm();

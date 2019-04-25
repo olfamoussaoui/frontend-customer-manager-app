@@ -1,5 +1,5 @@
 export class Customer {
-  id: string;
+  _id: string ;
   firstname: string;
   lastname: string;
   gender: string;
@@ -7,5 +7,5 @@ export class Customer {
   address: string;
   city: string;
   state: string;
-  ordertotal: number;
+  ordertotal: string;
 }
